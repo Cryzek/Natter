@@ -1,0 +1,19 @@
+{
+  "name": "chitchat",
+  "version": "1.0.0",
+  "description": "\"Simple chat application based on tutorial at socket io\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cryzek",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.7.2"
+  }
+}
