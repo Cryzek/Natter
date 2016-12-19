@@ -1,11 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Natter">
 <head>
-	<title> Chit Chat </title>
-</head>
-<body>
+	<base href="/">
+	<meta charset="utf-8">
+	<title> Natter - Casual Chatter </title>
+	<!-- the looks and the feel -->
+	<link rel="stylesheet" type="text/css" href="css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 
-	A Simple Chit Chat application.
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<!-- the mind of the app -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/angular.js"></script>
+	<script src="js/angular-ui-router.js"></script>
+	<script src="js/socket.io.js"></script>
+
+	<!-- controllers -->
+	<script src="controllers/mainctrl.js"></script>
+	<script src="app.js"></script>
+</head>
+
+<!-- The rest of the skeleton -->
+<body ng-controller="MainController as main">
+<!-- 
+	Two sections - side nav and the view
+	Side nav is hidden on login, register routes and all routes when screen width is below 992px i.e. med-and-down
+	Different views include - login, register, conversations, conversation thread(for now)
+ -->
+
+ 	<div class="flex-row-centered" id="app-view" ui-view>
+ 	</div>
+
 
 </body>
 </html>

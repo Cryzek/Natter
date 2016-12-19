@@ -1,11 +1,16 @@
-var http = require('http');
 var express = require('express');
-
-/*The express application to handle it all.*/
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var PORT = 8000;
 
-app.get('/',function(req, res){
-	console.log("New Client connected");
+app.use(express.static(__dirname + '/public/'));
+
+io.on('connection', function(socket){
+	console.log("A user has connected.");
 });
 
-app.listen(8000);
+/*Finally the port we are listening on*/
+app.listen(PORT, function(){
+	console.log(`Server started on port ${PORT}`);
+});
