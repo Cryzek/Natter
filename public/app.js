@@ -1,26 +1,48 @@
-var natterApp = angular
-.module('Natter',[
-					'ui.router',
-					'mainctrl'
-					]);
+var natterApp = angular.module('Natter',[
+										'ui.router',
+										'ngAnimate',
+										'authService',
+										'mainctrl',
+										'authctrl',
+										'homectrl',
+										'conversationctrl'
+										]);
 
-natterApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+natterApp.config(setupConfig);
+
+function setupConfig($stateProvider, $urlRouterProvider, $locationProvider) {
 	
-	/*Turn on html 5 mode for angular*/
 	$locationProvider.html5Mode(true);
-
-
-	$urlRouterProvider.otherwise('/');
 
 	$stateProvider
 		.state('home', {
 			url: "/",
-			templateUrl: "pages/home.html" 
+			templateUrl: "pages/home.html",
+			controller: "HomeController",
+			controllerAs: "vm"
 		})
-		.state('userAuth', {
-		  	url: "userauth",
-		  	templateUrl: "pages/userauth.html"
+		.state('userauth', {
+		  	url: "/userauth",
+		  	templateUrl: "pages/userauth.html",
+		  	controller: "AuthController",
+		  	controllerAs: "vm"
+		})
+		.state('home.listusers', {
+			url: "listusers",
+			templateUrl: "pages/listusers.html"
+		})
+		.state('home.listgroups', {
+			url: "listgroups",
+			templateUrl: "pages/listgroups.html"
+		})
+		.state('home.converse', {
+			url: "natter/:userid",
+			templateUrl: "pages/conversation.html",
+			controller: "ConversationController",
+			controllerAs: "vm"
 		});
 
 
-});
+	$urlRouterProvider.otherwise('/');
+
+}

@@ -7,6 +7,7 @@
 	<!-- the looks and the feel -->
 	<link rel="stylesheet" type="text/css" href="css/materialize.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<link rel="shortcut icon" href="favicon.ico">
 
@@ -15,22 +16,28 @@
 	<script src="js/materialize.js"></script>
 	<script src="js/angular.js"></script>
 	<script src="js/angular-ui-router.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
 	<script src="js/socket.io.js"></script>
+
+	<!-- services -->
+	<script src="services/authService.js"></script>
 
 	<!-- controllers -->
 	<script src="controllers/mainctrl.js"></script>
+	<script src="controllers/homectrl.js"></script>
+	<script src="controllers/authctrl.js"></script>
+	<script src="controllers/conversationctrl.js"></script>
 	<script src="app.js"></script>
 </head>
-
 <!-- The rest of the skeleton -->
 <body ng-controller="MainController as main">
 <!-- 
 	Two sections - side nav and the view
 	Side nav is hidden on login, register routes and all routes when screen width is below 992px i.e. med-and-down
-	Different views include - login, register, conversations, conversation thread(for now)
+	Two views for 2 states i.e. authorized or logged in and the other is unauthorized
  -->
 
- 	<div class="flex-row-centered" id="app-view" ui-view>
+ 	<div class="flex-row-centered row" id="app-view" ui-view>
  	</div>
 
 

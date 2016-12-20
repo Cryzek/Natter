@@ -1,12 +1,28 @@
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
 
-body {
-	background-color: #ffeb73;
-}
+	Font imports
+*/
+	@font-face{
+		src: url("../fonts/Pacifico.ttf");
+		font-family: "Pacifico"; 
+	}
+
+	@font-face{
+		src: url("../fonts/Gotham-Light.ttf");
+		font-family: "GothamLight"; 
+	}
+
+	@font-face{
+		src: url("../fonts/Gotham-Medium.ttf");
+		font-family: "GothamMedium"; 
+	}
+
+	@font-face{
+		src: url("../fonts/Gotham-Bold.ttf");
+		font-family: "GothamBold"; 
+	}
+/*
+	Font imports ends here
+*/
 
 /* 
 	a few helper classes
@@ -46,7 +62,320 @@ body {
 	helper classes ends here.
 */
 
-#app-view {
-	width: ;
-	height: 100vh;
-}
+/*
+	Rules to be followed globally
+*/
+	* {
+		box-sizing: border-box;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	body {
+		perspective: 800px;
+		overflow: hidden;
+		font-family: "GothamMedium";
+
+	}
+
+	.app-name {
+		height: 80px;
+		font-family: "GothamMedium", "Pacifico";
+		font-size: 1.5em;
+		font-weight: bold;
+	}
+
+	#app-view {
+		width: 100%;
+		height: 100vh;
+		transform-style: preserve-3d;
+	}
+
+	#app-view.ng-enter {
+		opacity: 0;
+		transform: translateY(5%);
+		transition: opacity 0.75s,
+					transform 0.4s;
+	}	
+
+	#app-view.ng-enter-active {
+		opacity: 1;
+		transform: translateY(0%); 
+	}
+
+	@media(max-width: 992px) {
+	}
+
+	@media(max-width: 600px) {
+	}
+/*
+	End of global rules
+*/
+
+/*
+	Authorization Route
+*/
+	#auth-container {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background-color: #47c9d5;
+		background: -webkit-linear-gradient(left top, #47c9d5, #b3ffe7);
+		background: -o-linear-gradient(bottom right, #47c9d5, #b3ffe7); 
+		background: -moz-linear-gradient(bottom right, #47c9d5, #b3ffe7); 
+		background: linear-gradient(to bottom right, #47c9d5, #b3ffe7);
+	}
+
+	#auth-container > .app-name {
+		color: #ffeb73;
+	}
+
+	#auth-container > #form-container {
+		height: calc(100vh - 80px);
+		margin-top: -40px;
+	}
+	
+	#auth-container > #form-container > form {
+		width: 400px;
+		height: 300px;
+		background-color: #ffee8a;
+		background: -webkit-linear-gradient(left top, #ffee8a, #ffee8a);
+		background: -o-linear-gradient(bottom right, #ffee8a, #ffee8a); 
+		background: -moz-linear-gradient(bottom right, #ffee8a, #ffee8a); 
+		background: linear-gradient(to bottom right, #ffee8a, #ffee8a);
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.1), 0 3px 1px -2px rgba(0, 0, 0, 0.1);
+	}
+
+	#auth-container > #form-container > form > * {
+		margin: 20px 0 !important;
+		font-family: "GothamLight";
+	}
+
+	#auth-container > #form-container > form > .input-field {
+		background-color: white;
+	}
+
+	#auth-container > #form-container > form input {
+		border-bottom: 1px solid transparent;
+		color: #5ba6ff;
+	}
+
+	#auth-container > #form-container > form input:focus:not([readonly]) {
+		border-bottom: 1px solid #5ba6ff;
+		box-shadow: 0 1px 0 0 #5ba6ff;
+	}
+
+	#auth-container > #form-container > form input:focus:not([readonly]) + label {
+		color: #5ba6ff;
+		font-weight: bold;
+	}
+
+	#auth-container > #form-container > form  button {
+		background-color: #5ba6ff;
+		color: white;
+		padding: 0px 20px !important;
+		box-shadow: none;
+	}
+/*
+	Authorization Route ends here
+*/
+
+/*
+	Home Route
+*/
+	#home-container {
+		position: relative;
+		height: 100%;
+	}
+
+	/* Side navbar */
+		#side-navbar {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 10;
+			width: 300px;
+			height: 100%;
+			overflow-y: auto;
+			background-color: #ffb3c1;
+			background: -webkit-linear-gradient(top, #ffb3c1 25%, #ff5472);
+			background: -o-linear-gradient(bottom, #ffb3c1 25%, #ff5472); 
+			background: -moz-linear-gradient(bottom, #ffb3c1 25%, #ff5472); 
+			background: linear-gradient(to bottom, #ffb3c1 25%, #ff5472); 
+			transform: translateX(0);
+			transition: transform 0.75s;
+		}
+
+		#side-navbar > li {
+			align-items: flex-start;
+			width: 100%;
+			height: 60px;
+		}
+
+		#side-navbar > li#account {
+			height: 200px;
+			background-color: rgba( 255, 159, 177, 0);
+		}
+
+		#side-navbar > li:nth-of-type(2) {
+			background-color: rgba(255, 161, 178, 1);
+		}
+
+		#side-navbar > li:nth-of-type(3) {
+			background-color: rgba(253, 134, 156, 1);
+		}
+
+		#side-navbar > li:nth-of-type(4) {
+			background-color: rgba(255, 107, 133, 0.6);
+		}
+
+		#side-navbar > li > a {
+			width: 100%;
+			text-indent: 20%;
+			font-family: "GothamLight";
+			font-weight: bold;
+			font-size: 1.2em;
+			color: white;
+		}
+	/* Side navbar ends here */
+
+	#content-container {
+		width: 100%;
+		height: 100%;
+		flex-grow: 2;
+		background-color: #ffee8a;
+		padding: 10px 20px 20px 320px !important;
+		transition: padding 0.75s;
+	}
+
+	#content-container > #site-options {
+		width: 100%; 
+		height: 80px;
+	}
+	
+	#content-container > #site-options > .app-name {
+		font-family: "GothamLight";
+		color: #63a2b9;
+	}
+
+	#content-container > #content-view {
+		width: 100%; 
+		height: calc(100% - 80px);
+		overflow-y: auto;
+	}
+
+	#content-container > #content-view::-webkit-scrollbar {
+	    width: 4px;
+	    border-radius: 10px;
+	}
+
+	#content-container > #content-view::-webkit-scrollbar-track {
+	    background-color: rgba(255, 255, 255, 0.4);
+	    border-radius: 10px;
+	}
+
+	#content-container > #content-view::-webkit-scrollbar-thumb {
+	    background: white;
+	    border-radius: 10px;
+	}
+
+	@media(max-width: 992px) {
+		/* Side navbar */
+			#side-navbar {
+				transform: translateX(-100%);
+			}
+		/* Side navbar ends here */
+
+		#content-container {
+			padding: 10px 20px 20px 20px !important;
+		}
+	}
+/*
+	Home Route ends here
+*/
+
+/*
+	Conversation Route
+*/
+	#conversation-container {
+		width: 100%;
+		height: 100%;
+	}
+
+	#conversation-container > #messages-list {
+		position: relative;
+		height: calc(100% - 15vh);
+		overflow-y: auto;
+	}
+
+	#conversation-container > #messages-list > .border {
+		position: absolute;
+		top: 10%;
+		width: 1px;
+		height: 90%;
+		background-color: white;
+	}
+
+	#conversation-container > #messages-list > .border.left {
+		left: 0;
+	}
+
+	#conversation-container > #messages-list > .border.right {
+		right: 0;
+	}
+
+	#conversation-container > #messages-list::-webkit-scrollbar {
+	    width: 4px;
+	    border-radius: 10px;
+	}
+
+	#conversation-container > #messages-list::-webkit-scrollbar-track {
+	    background-color: rgba(255, 255, 255, 0.4);
+	    border-radius: 10px;
+	}
+
+	#conversation-container > #messages-list::-webkit-scrollbar-thumb {
+	    background: white;
+	    border-radius: 10px;
+	}
+
+	#conversation-container > #send-message {
+		height: 15vh;
+	}
+
+	/* Form part starts here */
+	#conversation-container > #send-message > form {
+		width: 100%;
+		height: calc(100% - 1vh);
+		padding-left: 40px !important; 
+	}
+
+	#conversation-container > #send-message > form > .input-field {
+		width: calc(100% - 40px);
+		height: 100% !important;
+		padding-right: 20px !important;
+		background-color: white;
+	}
+
+	#conversation-container > #send-message > form > .input-field > textarea {
+		width: 100%;
+		height: 100% !important;
+		border: none;
+	}
+
+	#conversation-container > #send-message > form > .input-field > textarea:focus:not([readonly]) {
+		border: none;
+		box-shadow: none;
+	}
+
+	#conversation-container > #send-message > form > .input-field > textarea:focus:not([readonly]) + label {
+		color: #63a2b9;
+	}
+
+	#conversation-container > #send-message > form > button {
+		background-color: #63a2b9;
+		transform: translateX(-50%);
+	}
+/*
+	Conversation Route ends here
+*/

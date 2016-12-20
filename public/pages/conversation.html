@@ -1,0 +1,16 @@
+<div class="flex-col-centered" id="conversation-container">
+	<div class="col s12" id="messages-list">
+		<span class="border left"></span>
+		<span class="border right"></span>
+
+	</div>
+	<div class="col s12" id="send-message">
+		<form class="flex-row-centered" ng-submit="vm.sendMessage()">
+			<div class="input-field">
+				<textarea class="materialize-textarea" id="message" ng-model="vm.message"></textarea>
+				<label for="message">Your message : </label>
+			</div>
+			<button class="btn btn-floating waves-effect waves-light"><i class="material-icons">send</i>Send</button>
+		</form>
+	</div>
+</div>

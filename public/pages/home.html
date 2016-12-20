@@ -1,0 +1,24 @@
+<div class="col s12" id="home-container">
+	<!-- This is the side navbar  -->
+	<ul class="" id="side-navbar">
+		<li class="flex-col-centered waves-light waves-effect" id="account">
+			
+		</li>
+		<li class="flex-col-centered waves-light waves-effect">
+			<a ui-sref=".listusers">Conversations</a>
+		</li>
+		<li class="flex-col-centered waves-light waves-effect">
+			<a ui-sref=".listgroups">Groups</a>
+		</li>
+	</ul>
+
+	<div class="flex-col-centered" id="content-container">
+		<div id="site-options">
+			<p class="flex-col-centered app-name">Natter</p>
+		</div>
+		
+		<!-- ui view for conversations -->
+		<div ui-view id="content-view">
+		</div>
+	</div>
+</div>
