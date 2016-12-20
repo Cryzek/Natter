@@ -1,4 +1,4 @@
-
+/*
 	Font imports
 */
 	@font-face{
@@ -83,6 +83,10 @@
 		font-family: "GothamMedium", "Pacifico";
 		font-size: 1.5em;
 		font-weight: bold;
+	}
+
+	.app-name > span {
+		cursor: pointer;
 	}
 
 	#app-view {
@@ -203,7 +207,7 @@
 			background: -moz-linear-gradient(bottom, #ffb3c1 25%, #ff5472); 
 			background: linear-gradient(to bottom, #ffb3c1 25%, #ff5472); 
 			transform: translateX(0);
-			transition: transform 0.75s;
+			transition: transform 0.5s, box-shadow 0.5s;
 		}
 
 		#side-navbar > li {
@@ -238,6 +242,33 @@
 			color: white;
 		}
 	/* Side navbar ends here */
+
+	#navbar-btn {
+		position: absolute;
+		display: none;
+		top: 30px;
+		left: calc(300px);
+		width: 40px;
+		height: 40px;
+		background-color: white;
+		z-index: 30;
+		border-radius: 2px;
+		cursor: pointer;
+	}
+
+	#navbar-btn img {
+		width: 25px;
+		height: 25px;
+		transition: transform 0.5s;
+	}
+
+	#navbar-btn.navbar-closed img {
+		transform: rotateZ(90deg);
+	}
+
+	#navbar-btn.navbar-opened img {
+		transform: rotateZ(-90deg);
+	}
 
 	#content-container {
 		width: 100%;
@@ -284,12 +315,32 @@
 			#side-navbar {
 				transform: translateX(-100%);
 			}
+
+			#side-navbar.navbar-opened{
+				box-shadow: 2px 0 2px 0 rgba(0, 0, 0, 0.5);
+				transform: translateX(0%);
+			}
+
+
 		/* Side navbar ends here */
+
+		#navbar-btn {
+			display: flex;
+			left: 5px;
+			transition: left 0.5s;
+		}
+
+		#navbar-btn.navbar-opened {
+			left: calc(300px + 5px);
+		}
+
+		/*#navbar-btn.navbar-*/
 
 		#content-container {
 			padding: 10px 20px 20px 20px !important;
 		}
 	}
+
 /*
 	Home Route ends here
 */
@@ -302,26 +353,33 @@
 		height: 100%;
 	}
 
+	#conversation-container > #user-info {
+		height: 60px;
+		box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.5);
+	}
+
+	#conversation-container > #user-info > .chip{
+		height: 40px;
+		background-color: transparent;
+		color: white;
+		font-size: 1.2em;
+		font-family: "GothamMedium";
+	}
+
+	#conversation-container > #user-info > .chip > *{
+		margin: auto 10px !important;
+	}
+
+	#conversation-container > #user-info > .chip > img{
+		width: 40px !important;
+		height: 40px !important;
+		border: 2px solid white;
+	}
+
 	#conversation-container > #messages-list {
 		position: relative;
-		height: calc(100% - 15vh);
+		height: calc(100% - 15vh - 60px);
 		overflow-y: auto;
-	}
-
-	#conversation-container > #messages-list > .border {
-		position: absolute;
-		top: 10%;
-		width: 1px;
-		height: 90%;
-		background-color: white;
-	}
-
-	#conversation-container > #messages-list > .border.left {
-		left: 0;
-	}
-
-	#conversation-container > #messages-list > .border.right {
-		right: 0;
 	}
 
 	#conversation-container > #messages-list::-webkit-scrollbar {
@@ -343,7 +401,7 @@
 		height: 15vh;
 	}
 
-	/* Form part starts here */
+	/* Form part for send message starts here */
 	#conversation-container > #send-message > form {
 		width: 100%;
 		height: calc(100% - 1vh);
@@ -361,6 +419,10 @@
 		width: 100%;
 		height: 100% !important;
 		border: none;
+	}
+
+	#conversation-container > #send-message > form > .input-field > textarea + label {
+		transition: all 0.25s;
 	}
 
 	#conversation-container > #send-message > form > .input-field > textarea:focus:not([readonly]) {

@@ -1,6 +1,6 @@
 <div class="col s12" id="home-container">
 	<!-- This is the side navbar  -->
-	<ul class="" id="side-navbar">
+	<ul ng-class="{ 'navbar-opened': vm.navbarOpen, 'navbar-closed': !vm.navbarOpen }" id="side-navbar">
 		<li class="flex-col-centered waves-light waves-effect" id="account">
 			
 		</li>
@@ -12,9 +12,15 @@
 		</li>
 	</ul>
 
-	<div class="flex-col-centered" id="content-container">
+	<span class="z-depth-1 flex-row-centered" ng-class="{ 'navbar-opened': vm.navbarOpen, 'navbar-closed': !vm.navbarOpen }" id="navbar-btn" ng-click="vm.toggleNavbar()">
+		<img src="images/triangle.png">
+	</span>
+
+	<div class="flex-col-centered" id="content-container" ng-click="vm.toggleNavbar('close')">
 		<div id="site-options">
-			<p class="flex-col-centered app-name">Natter</p>
+			<p class="flex-col-centered app-name">
+				<span ui-sref="home">Natter</span>
+			</p>
 		</div>
 		
 		<!-- ui view for conversations -->
