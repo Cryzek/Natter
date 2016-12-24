@@ -1,5 +1,5 @@
 {
-  "name": "chitchat",
+  "name": "natter",
   "version": "1.0.0",
   "description": "\"Simple chat application based on tutorial at socket io\"",
   "main": "server.js",
@@ -10,7 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "mongoose": "^4.7.4",
     "socket.io": "^1.7.2"
   }
 }

@@ -30,6 +30,9 @@ jspm_packages
 # Optional npm cache directory
 .npm
 
+# Environment variables
+.env
+
 # Optional REPL history
 .node_repl_history
 

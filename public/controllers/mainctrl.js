@@ -1,17 +1,5 @@
 angular
-.module('mainctrl', ['ui.router'])
-.controller('MainController', function($state) {
+.module('mainctrl', ['ui.router', 'authService'])
+.controller('MainController', function($state, Authorize) {
 	var self = this;
-
-	/*Whether the user is logged in or not*/
-	self.isLoggedIn = true;
-
-	window.setTimeout(function(){
-		if( self.isLoggedIn == false) {
-			$state.go('userauth');
-		}
-	}, 1000);
-
-
-
 });

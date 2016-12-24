@@ -2,6 +2,15 @@ angular
 .module('authctrl', ['ui.router', 'authService'])
 .controller('AuthController', function($state, Authorize, $scope) {
 
+ 	Authorize
+ 		.isLoggedIn()
+ 		.success(function(response) {
+ 			console.log(response.status);
+ 			if(response.status == true) {
+ 				$state.go('home');
+ 			}
+ 		});
+
 	var self = this;
 
 	self.user = {
@@ -9,14 +18,14 @@ angular
 		password: ""
  	};
 
+
  	/*Send a login request using the authorize service*/
 	self.login = function(){
 		Authorize
 			.login(self.user)
 			.success(function(response) {
-				if(response.status) {
+				if(response.status == true) {
 					console.log(response.message);
-					$scope.$parent.main.isLoggedIn = true;
 					$state.go('home');
 				}
 			});

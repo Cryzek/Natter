@@ -4,11 +4,14 @@
 		<li class="flex-col-centered waves-light waves-effect" id="account">
 			
 		</li>
-		<li class="flex-col-centered waves-light waves-effect">
-			<a ui-sref=".listusers">Conversations</a>
+		<li class="flex-col-centered waves-light waves-effect" ui-sref=".listusers">
+			<a>Conversations</a>
 		</li>
-		<li class="flex-col-centered waves-light waves-effect">
-			<a ui-sref=".listgroups">Groups</a>
+		<li class="flex-col-centered waves-light waves-effect" ui-sref=".listgroups">
+			<a>Groups</a>
+		</li>
+		<li class="flex-col-centered waves-light waves-effect" ng-click="vm.logout()">
+			<a>Logout</a>
 		</li>
 	</ul>
 
