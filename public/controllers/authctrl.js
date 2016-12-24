@@ -18,7 +18,6 @@ angular
 		password: ""
  	};
 
-
  	/*Send a login request using the authorize service*/
 	self.login = function(){
 		Authorize

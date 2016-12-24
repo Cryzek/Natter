@@ -10,7 +10,7 @@ var socketio = require('socket.io');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
-
+var authRouter = require('./serverroutes/authroute')(express);
 
 /*
 	Declaring our variables
@@ -43,43 +43,7 @@ app.use(express.static(__dirname + '/public/') );
 /*
 	Different routes
 */
-app.post('/auth/login', function(req, res) {
-	var user = req.body;
-	
-	if(! (user.usename != "" && user.password != "") ) {
-		console.log("Empty fields. SOS. We have been hacked.");
-		res.send({
-			status : false,
-			message : "Cannot authenticate"
-		});
-	}
-
-	/*Already logged in users are not checked here.*/
-	req.session.user_id = user.username;
-	console.log(`User logged with session id - ${req.session.user_id}`);
-	res.json({
-		status: true,
-		message: "Successfully logged in."
-	});
-});
-
-app.post('/auth/logout', function(req, res) {
-	delete req.session.user_id;
-	res.redirect('login');
-});
-
-app.post('/auth/check', function(req, res) {
-	if(req.session.user_id) {
-		res.json({
-			status: true
-		});
-	}
-	else {
-		res.json({
-			status: false
-		});
-	}
-});
+app.use('/auth', authRouter);	
 
 /*Required. Cause unknown*/
 app.get('*', function(req, res) {

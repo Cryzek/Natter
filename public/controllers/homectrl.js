@@ -25,7 +25,6 @@ angular
 
 	self.logout = function() {
 		Authorize.logout();
-		$scope.$parent.main.isLoggedIn = false;
 		$state.go('userauth');
 	}
 });
