@@ -1,5 +1,5 @@
 <div class="flex-col-centered" id="conversation-container">
-	<div class="col s11 flex-row-centered" id="user-info">
+	<div class="col s12 flex-row-centered" id="user-info">
 	    <div class="chip">
 		    <!-- <img src="images/jason.jpg" alt="Contact Person"> -->
     		Jason Bourne
@@ -7,16 +7,21 @@
 	</div>
 	<!-- This is where all the old messages would go. -->
 	<div class="col s12" id="messages-list">
-		<div class="">
+		<!-- Just for reference : nat refer to message exchanged between the users -->
+		<div class="flex-row-centered nat sender">
+		</div>
+		<div class="flex-row-centered nat receiver">
 		</div>
 	</div>
 	<div class="col s12" id="send-message">
-		<form class="flex-row-centered" ng-submit="vm.sendMessage()">
+		<form class="flex-col-centered" ng-submit="vm.sendMessage()">
 			<div class="input-field">
 				<textarea class="materialize-textarea" id="message" ng-model="vm.message" required></textarea>
 				<label for="message">Your message : </label>
 			</div>
-			<button class="btn btn-floating waves-effect waves-light"><i class="material-icons">send</i>Send</button>
+			<div class="options flex-row-centered">
+				<button class="btn waves-effect waves-light">Send</button>
+			</div>
 		</form>
 	</div>
 </div>

@@ -6,11 +6,11 @@
 	<div class="row col s12 flex-row-centered" id="form-container">
 		<form class="col s10 m8 l4 z-depth-1 flex-col-centered"  ng-submit="vm.login()">
 			<div class="col s11 m10 input-field">
-				<input type="text" id="username" name="username" ng-model="vm.user.username">
+				<input type="text" id="username" name="username" ng-model="vm.user.username" required>
 				<label for="username">Username</label>
 			</div>
 			<div class="col s11 m10 input-field">
-				<input type="password" id="userpassword" name="userpassword" ng-model="vm.user.password">
+				<input type="password" id="userpassword" name="userpassword" ng-model="vm.user.password" required>
 				<label for="userpassword">Password</label>
 			</div>
 			<button class="btn waves-effect waves-light">Log In</button>

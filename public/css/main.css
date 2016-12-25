@@ -295,17 +295,18 @@
 
 	#content-container > #site-options {
 		width: 100%; 
-		height: 80px;
+		height: 60px;
 	}
 	
 	#content-container > #site-options > .app-name {
+		height: 100%;
 		font-family: "GothamLight";
 		color: #63a2b9;
 	}
 
 	#content-container > #content-view {
 		width: 100%; 
-		height: calc(100% - 80px);
+		height: calc(100% - 60px);
 		overflow-y: auto;
 	}
 
@@ -362,13 +363,19 @@
 	Conversation Route
 */
 	#conversation-container {
+		position: relative;
 		width: 100%;
 		height: 100%;
+		padding-top: 60px !important;
 	}
 
 	#conversation-container > #user-info {
-		height: 60px;
-		box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.5);
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 40px;
+		background-color: #ffee8a;
+		box-shadow: 0px 7px 5px -4px rgba(197, 197, 197, 0.53);
 	}
 
 	#conversation-container > #user-info > .chip{
@@ -380,7 +387,7 @@
 	}
 
 	#conversation-container > #user-info > .chip > *{
-		margin: auto 10px !important;
+		margin: auto 0px !important;
 	}
 
 	#conversation-container > #user-info > .chip > img{
@@ -390,8 +397,10 @@
 	}
 
 	#conversation-container > #messages-list {
-		position: relative;
-		height: calc(100% - 15vh - 60px);
+		display: block;
+		padding: 3vh 2vw !important;
+		justify-content: flex-end;
+		height: calc(100% - 40px);
 		overflow-y: auto;
 	}
 
@@ -410,22 +419,46 @@
 	    border-radius: 10px;
 	}
 
+	#conversation-container > #messages-list > .nat {
+		display: block;
+		max-width: 60%;
+		min-width: 300px;
+		min-height: 100px;
+		background-color: white;
+		border-radius: 10px;
+		margin: 2vh 0 !important;
+	}
+
+	#conversation-container > #messages-list > .nat.sender {
+		margin-right: auto !important;
+		background-color: #b1eaff;
+	}
+
+	#conversation-container > #messages-list > .nat.receiver{
+		margin-left: auto !important;
+		background-color: #ebf6ff;
+	}
+
 	#conversation-container > #send-message {
-		height: 15vh;
+		height: 20vh;
+		/*box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.34),
+					0 3px 14px 2px rgba(0, 0, 0, 0.22),
+					0 5px 5px -3px rgba(0, 0, 0, 0.3);*/
 	}
 
 	/* Form part for send message starts here */
 	#conversation-container > #send-message > form {
+		position: relative;
 		width: 100%;
-		height: calc(100% - 1vh);
+		height: calc(100% - 0vh);
 		min-height: 60px;
 		padding-left: 0px !important; 
 	}
 
 	#conversation-container > #send-message > form > .input-field {
-		width: calc(100% );
+		width: calc(100%);
 		height: 100% !important;
-		padding-right: 20px !important;
+		padding: 1vh 20px !important;
 		background-color: white;
 	}
 
@@ -448,11 +481,22 @@
 		color: #63a2b9;
 	}
 
-	#conversation-container > #send-message > form > button {
+	#conversation-container > #send-message > form > .options{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		justify-content: flex-end;
+		width: 100%;
 		height: 40px;
-		width: 40px;
+		padding: 0 10px !important;
+		/*box-shadow: 0 -1px 3px 0 rgba(128, 128, 128, 0.5);*/
+	}
+
+	#conversation-container > #send-message > form > .options > button {
+		height: 36px;
+		padding: 0 10px !important;
 		background-color: #63a2b9;
-		transform: translateX(-50%);
+		/*transform: translateX(-50%);*/
 	}
 /*
 	Conversation Route ends here

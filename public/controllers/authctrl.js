@@ -5,7 +5,7 @@ angular
  	Authorize
  		.isLoggedIn()
  		.success(function(response) {
- 			console.log(response.status);
+ 			console.log(`${response.status} with the message ${response.message}`);
  			if(response.status == true) {
  				$state.go('home');
  			}
@@ -26,6 +26,9 @@ angular
 				if(response.status == true) {
 					console.log(response.message);
 					$state.go('home');
+				}
+				else {
+					console.log(response.message)
 				}
 			});
 	}
