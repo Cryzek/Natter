@@ -25,6 +25,7 @@ angular
 			.success(function(response) {
 				if(response.status == true) {
 					console.log(response.message);
+					$scope.$parent.main.user.username = self.user.username;
 					$state.go('home');
 				}
 				else {

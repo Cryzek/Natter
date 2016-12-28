@@ -2,6 +2,7 @@ var natterApp = angular.module('Natter',[
 										'ui.router',
 										'ngAnimate',
 										'authService',
+										'messageService',
 										'mainctrl',
 										'authctrl',
 										'homectrl',

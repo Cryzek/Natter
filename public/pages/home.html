@@ -1,16 +1,16 @@
 <div class="col s12" id="home-container">
 	<!-- This is the side navbar  -->
 	<ul ng-class="{ 'navbar-opened': vm.navbarOpen, 'navbar-closed': !vm.navbarOpen }" id="side-navbar">
-		<li class="flex-col-centered waves-light waves-effect" id="account">
+		<li class="flex-col-centered waves-light waves-effect" id="account" ng-click="vm.toggleNavbar('close')">
 			
 		</li>
-		<li class="flex-col-centered waves-light waves-effect" ui-sref=".listusers">
+		<li class="flex-col-centered waves-light waves-effect" ui-sref=".listusers" ng-click="vm.toggleNavbar('close')">
 			<a>Conversations</a>
 		</li>
-		<li class="flex-col-centered waves-light waves-effect" ui-sref=".listgroups">
+		<li class="flex-col-centered waves-light waves-effect" ui-sref=".listgroups" ng-click="vm.toggleNavbar('close')">
 			<a>Groups</a>
 		</li>
-		<li class="flex-col-centered waves-light waves-effect" ng-click="vm.logout()">
+		<li class="flex-col-centered waves-light waves-effect" ng-click="vm.logout()" ng-click="vm.toggleNavbar('close')">
 			<a>Logout</a>
 		</li>
 	</ul>

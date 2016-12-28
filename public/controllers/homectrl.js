@@ -1,6 +1,6 @@
 angular
 .module('homectrl', ['ui.router', 'authService'])
-.controller('HomeController', function($state, Authorize, $scope) {
+.controller('HomeController', function($state, Authorize, $scope, $http) {
 	
 	Authorize
 		.isLoggedIn()
@@ -11,10 +11,12 @@ angular
 		});
 
 	var self = this;
+	/*Get user information.*/
+	(function loadUserInfo() {
+	})();
 
 	/*Maintain navbar state.*/
 	self.navbarOpen = false;
-
 	self.toggleNavbar = function(action) {
 		if(action == 'close') {
 			self.navbarOpen = false;

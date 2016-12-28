@@ -1,4 +1,4 @@
-var model = require('../models.js');
+var model = require('../models');
 var passwordSec = require('../passwordSec');
 var User = model.user;
 
@@ -17,7 +17,7 @@ module.exports = function(express) {
 			});
 		}
 
-		User.findOne({ username : user.username }, handleUserAuthentication);
+		User.findOne({ username : user.username }).exec(handleUserAuthentication);
 		
 		function handleUserAuthentication(err, dbuser) {
 			if(err) {
@@ -66,11 +66,10 @@ module.exports = function(express) {
 				}	
 			}
 		};
-
 	});
 
 	authRouter.post('/logout', function(req, res) {
-		console.log("${req.session.user_id} logged out.");
+		console.log(`${req.session.user_id} logged out.`);
 		delete req.session.user_id;
 		req.session.destroy();
 		res.clearCookie('connect.sid', { path: '/' });
@@ -79,7 +78,6 @@ module.exports = function(express) {
 
 	authRouter.post('/check', function(req, res) {
 		if(req.session.user_id) {
-			console.log("Already logged in.");
 			res.json({
 				status: true,
 				message: "Already logged in."

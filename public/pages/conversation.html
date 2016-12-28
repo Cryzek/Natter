@@ -2,15 +2,14 @@
 	<div class="col s12 flex-row-centered" id="user-info">
 	    <div class="chip">
 		    <!-- <img src="images/jason.jpg" alt="Contact Person"> -->
-    		Jason Bourne
+    		{{ vm.sender }}
     	</div>
 	</div>
 	<!-- This is where all the old messages would go. -->
 	<div class="col s12" id="messages-list">
 		<!-- Just for reference : nat refer to message exchanged between the users -->
-		<div class="flex-row-centered nat sender">
-		</div>
-		<div class="flex-row-centered nat receiver">
+		<div class="flex-row-centered nat" ng-repeat="nat in vm.nats | orderBy: 'time'" ng-class="{ 'sender': nat.sentByUser, 'receiver': !nat.sentByUser}">
+			<p>{{ nat.message }}</p>
 		</div>
 	</div>
 	<div class="col s12" id="send-message">

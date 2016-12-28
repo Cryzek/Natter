@@ -72,7 +72,8 @@
 	}
 
 	body {
-		perspective: 800px;
+		-webkit-perspective: 800px;
+		        perspective: 800px;
 		overflow: hidden;
 		font-family: "GothamMedium";
 
@@ -92,19 +93,29 @@
 	#app-view {
 		width: 100%;
 		height: 100vh;
-		transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
+		        transform-style: preserve-3d;
 	}
 
 	#app-view.ng-enter {
 		opacity: 0;
-		transform: translateY(5%);
+		-webkit-transform: translateY(5%);
+		        transform: translateY(5%);
+		-webkit-transition: opacity 0.75s,
+					-webkit-transform 0.4s;
+		transition: opacity 0.75s,
+					-webkit-transform 0.4s;
 		transition: opacity 0.75s,
 					transform 0.4s;
+		transition: opacity 0.75s,
+					transform 0.4s,
+					-webkit-transform 0.4s;
 	}	
 
 	#app-view.ng-enter-active {
 		opacity: 1;
-		transform: translateY(0%); 
+		-webkit-transform: translateY(0%);
+		        transform: translateY(0%); 
 	}
 
 	@media(max-width: 992px) {
@@ -124,9 +135,8 @@
 		width: 100%;
 		height: 100%;
 		background-color: #47c9d5;
-		background: -webkit-linear-gradient(left top, #47c9d5, #b3ffe7);
-		background: -o-linear-gradient(bottom right, #47c9d5, #b3ffe7); 
-		background: -moz-linear-gradient(bottom right, #47c9d5, #b3ffe7); 
+		background: -webkit-linear-gradient(left top, #47c9d5, #b3ffe7); 
+		background: -webkit-linear-gradient(top left, #47c9d5, #b3ffe7); 
 		background: linear-gradient(to bottom right, #47c9d5, #b3ffe7);
 	}
 
@@ -143,9 +153,8 @@
 		width: 400px;
 		height: 350px;
 		background-color: #ffee8a;
-		background: -webkit-linear-gradient(left top, #ffee8a, #ffee8a);
-		background: -o-linear-gradient(bottom right, #ffee8a, #ffee8a); 
-		background: -moz-linear-gradient(bottom right, #ffee8a, #ffee8a); 
+		background: -webkit-linear-gradient(left top, #ffee8a, #ffee8a); 
+		background: -webkit-linear-gradient(top left, #ffee8a, #ffee8a); 
 		background: linear-gradient(to bottom right, #ffee8a, #ffee8a);
 		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.1), 0 3px 1px -2px rgba(0, 0, 0, 0.1);
 	}
@@ -177,7 +186,7 @@
 	#auth-container > #form-container > form  button {
 		background-color: #5ba6ff;
 		color: white;
-		padding: 0px 20px !important;
+		padding: 0 20px !important;
 		box-shadow: none;
 	}
 
@@ -216,16 +225,20 @@
 			height: 100%;
 			overflow-y: auto;
 			background-color: #ffb3c1;
-			background: -webkit-linear-gradient(top, #ffb3c1 25%, #ff5472);
-			background: -o-linear-gradient(bottom, #ffb3c1 25%, #ff5472); 
-			background: -moz-linear-gradient(bottom, #ffb3c1 25%, #ff5472); 
+			background: -webkit-linear-gradient(top, #ffb3c1 25%, #ff5472); 
 			background: linear-gradient(to bottom, #ffb3c1 25%, #ff5472); 
-			transform: translateX(0);
+			-webkit-transform: translateX(0); 
+			        transform: translateX(0);
+			-webkit-transition: box-shadow 0.5s, -webkit-transform 0.5s;
+			transition: box-shadow 0.5s, -webkit-transform 0.5s;
 			transition: transform 0.5s, box-shadow 0.5s;
+			transition: transform 0.5s, box-shadow 0.5s, -webkit-transform 0.5s;
 		}
 
 		#side-navbar > li {
-			align-items: flex-start;
+			-webkit-box-align: start;
+			    -ms-flex-align: start;
+			        align-items: flex-start;
 			width: 100%;
 			height: 60px;
 		}
@@ -273,23 +286,31 @@
 	#navbar-btn img {
 		width: 25px;
 		height: 25px;
+		-webkit-transition: -webkit-transform 0.5s;
+		transition: -webkit-transform 0.5s;
 		transition: transform 0.5s;
+		transition: transform 0.5s, -webkit-transform 0.5s;
 	}
 
 	#navbar-btn.navbar-closed img {
-		transform: rotateZ(90deg);
+		-webkit-transform: rotateZ(90deg);
+		        transform: rotateZ(90deg);
 	}
 
 	#navbar-btn.navbar-opened img {
-		transform: rotateZ(-90deg);
+		-webkit-transform: rotateZ(-90deg);
+		        transform: rotateZ(-90deg);
 	}
 
 	#content-container {
 		width: 100%;
 		height: 100%;
-		flex-grow: 2;
+		-webkit-box-flex: 2;
+		    -ms-flex-positive: 2;
+		        flex-grow: 2;
 		background-color: #ffee8a;
 		padding: 10px 20px 20px 320px !important;
+		-webkit-transition: padding 0.75s;
 		transition: padding 0.75s;
 	}
 
@@ -328,20 +349,25 @@
 	@media(max-width: 992px) {
 		/* Side navbar */
 			#side-navbar {
-				transform: translateX(-100%);
+				-webkit-transform: translateX(-100%);
+				        transform: translateX(-100%);
 			}
 
 			#side-navbar.navbar-opened{
 				box-shadow: 3px 0 6px 0 rgba(171, 169, 169, 0.5);
-				transform: translateX(0%);
+				-webkit-transform: translateX(0%);
+				        transform: translateX(0%);
 			}
 
 
 		/* Side navbar ends here */
 
 		#navbar-btn {
+			display: -webkit-box;
+			display: -ms-flexbox;
 			display: flex;
 			left: 5px;
+			-webkit-transition: left 0.5s;
 			transition: left 0.5s;
 		}
 
@@ -399,7 +425,9 @@
 	#conversation-container > #messages-list {
 		display: block;
 		padding: 3vh 2vw !important;
-		justify-content: flex-end;
+		-webkit-box-pack: end;
+		    -ms-flex-pack: end;
+		        justify-content: flex-end;
 		height: calc(100% - 40px);
 		overflow-y: auto;
 	}
@@ -423,27 +451,30 @@
 		display: block;
 		max-width: 60%;
 		min-width: 300px;
-		min-height: 100px;
+		min-height: 10vh;
+		height: auto;
 		background-color: white;
 		border-radius: 10px;
+		padding: 10px !important;
 		margin: 2vh 0 !important;
 	}
 
 	#conversation-container > #messages-list > .nat.sender {
 		margin-right: auto !important;
-		background-color: #b1eaff;
+		background-color: white;
+		/*background-color: #ebf6ff;*/
 	}
 
 	#conversation-container > #messages-list > .nat.receiver{
 		margin-left: auto !important;
-		background-color: #ebf6ff;
+		background-color: #b1eaff;
 	}
 
 	#conversation-container > #send-message {
 		height: 20vh;
-		/*box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.34),
+		box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.34),
 					0 3px 14px 2px rgba(0, 0, 0, 0.22),
-					0 5px 5px -3px rgba(0, 0, 0, 0.3);*/
+					0 5px 5px -3px rgba(0, 0, 0, 0.3);
 	}
 
 	/* Form part for send message starts here */
@@ -469,6 +500,7 @@
 	}
 
 	#conversation-container > #send-message > form > .input-field > textarea + label {
+		-webkit-transition: all 0.25s;
 		transition: all 0.25s;
 	}
 
@@ -485,7 +517,9 @@
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		justify-content: flex-end;
+		-webkit-box-pack: end;
+		    -ms-flex-pack: end;
+		        justify-content: flex-end;
 		width: 100%;
 		height: 40px;
 		padding: 0 10px !important;
