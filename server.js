@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var mongoose = require('mongoose');
 var mongoStore = require('connect-mongo')(expressSession);
+var DBINIT = require('./dbinit');
 
 /*
 	Declaring our variables
@@ -26,37 +27,16 @@ var PORT = process.env.PORT || 10000;
 var MIN = 60 * 1000;
 
 /*
+	Modules with dependencies
+*/
+var authRouter = require('./serverroutes/authroute')(express);
+var messageRouter = require('./serverroutes/messageroute')(express, io);
+var userInfoRouter = require('./serverroutes/userinforoute')(express);
+
+/*
 	Connecting to mongoose;
 */
-mongoose.connect(process.env.DBURI);
-
-/*Modules with dependencies*/
-var authRouter = require('./serverroutes/authroute')(express, io);
-var messageRouter = require('./serverroutes/messageroute')(express, io);
-
-/*Connection events on mongoose*/
-/*When successfully connected*/
-mongoose.connection.on('connected', function() {
-	console.log("Connected to natter database");
-});
-
-/*If the connection throws an error*/
-mongoose.connection.on('error', function(error) {
-	console.log(`Couldn't connect to database.\n Error : ${error}`);
-});
-
-/*When the connection is disconnected*/
-mongoose.connection.on('disconnect', function() {
-	console.log("Disconnected from database");
-});
-
-/*If the Node process ends, close the Mongoose connection*/
-process.on('SIGINT', function() {
-	mongoose.connection.close(function() {
-		console.log("Mongoose connection closed through app termination.");
-		process.exit(0);
-	});
-});
+DBINIT.init(mongoose, process.env.DBPATH, process.env.DBNAME);
 
 /*
 	Setting up different middlewares
@@ -83,16 +63,12 @@ app.use(express.static(__dirname + '/public/') );
 /*
 	Different routes
 */
+/*Authentication*/
 app.use('/auth', authRouter.Router);	
+/*Transfer and storing of messages*/
 app.use('/messages', messageRouter.Router);
-app.use('/user', function(req, res, next) {
-	if(req.session.user_id) {
-		res.send(req.session.user_id);	
-	}
-	else {
-		res.send(404, "Error");
-	}
-});
+/*User/s related information*/
+app.use('/users/', userInfoRouter.Router);
 
 /*Required. Cause unknown*/
 app.get('*', function(req, res) {
@@ -105,11 +81,12 @@ io.on('connection', function(socket) {
 		socket.join(username);
 	});
 
-	socket.on('send-message', function(message, userid) {
-		if(userid) {
-			socket.to(userid).emit('receive-message', "");
+	socket.on('send-message', function(message, receiverId) {
+		if(receiverId) {
+			socket.to(receiverId).emit('receive-message', {
+				message: message
+			});
 		}
-		// socket.broadcast.emit('receive-message', { "message": message}, socket.id);
 	});
 
 });

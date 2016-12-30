@@ -1,18 +1,18 @@
 angular
 .module('authctrl', ['ui.router', 'authService'])
-.controller('AuthController', function($state, Authorize, $scope) {
-
- 	Authorize
- 		.isLoggedIn()
- 		.success(function(response) {
- 			console.log(`${response.status} with the message ${response.message}`);
- 			if(response.status == true) {
- 				$state.go('home');
- 			}
- 		});
+.controller('AuthController', function($scope, $state, Authorize) {
 
 	var self = this;
-
+ 	
+ 	Authorize.isLoggedIn().success(authCheck);
+ 	
+ 	function authCheck(response) {
+		console.log(`${response.status}. Message: ${response.message}`);
+		if(response.status == true) {
+			$state.go('home.listusers');
+		}
+	}
+	
 	self.user = {
 		username: "",
 		password: ""
@@ -20,18 +20,17 @@ angular
 
  	/*Send a login request using the authorize service*/
 	self.login = function(){
-		Authorize
-			.login(self.user)
-			.success(function(response) {
-				if(response.status == true) {
-					console.log(response.message);
-					$scope.$parent.main.user.username = self.user.username;
-					$state.go('home');
-				}
-				else {
-					console.log(response.message)
-				}
-			});
+		Authorize.login(self.user).success(authHandler);
+
+		function authHandler(response) {
+			console.log(response.message);
+			if(response.status == true) {
+				$state.go('home.listusers');
+			}
+			else {
+				/*Propagate errors to the view.*/
+			}
+		};
 	}
 
 });

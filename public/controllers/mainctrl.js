@@ -1,24 +1,14 @@
 angular
 .module('mainctrl', ['ui.router', 'authService'])
-.controller('MainController', function($state, Authorize, $http) {
+.controller('MainController', function($state, Authorize) {
 	var self = this;
-	
-	self.user = {
-		username: ""
-	};
 
-	Authorize
-		.isLoggedIn()
-		.success(function(response) {
-			if(response.status == false) {
-				$state.go('userauth');
-			}
-			else{
-				$http.get('/user')
-					.success(function(response) {
-						self.user.username = response;
-					});
-			}
-		});
+	Authorize.isLoggedIn().success(authCheck);
+
+	function authCheck(response) {
+		if(response.status == false) {
+			$state.go('userauth');
+		}
+	}
 
 });

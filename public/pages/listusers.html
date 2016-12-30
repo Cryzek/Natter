@@ -1,5 +1,5 @@
 <div id="list-users">
-	<div class="user flex-row-centered col s12 waves-effect" ng-repeat="user in vm.userlist" ui-sref="user.id">
-
+	<div class="user flex-row-centered col s12 waves-effect" ng-repeat="user in vm.userlist" ui-sref="home.natter({receiverId: user.username})">
+	{{ user.username }}
 	</div>
 </div>

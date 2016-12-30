@@ -44,11 +44,7 @@ module.exports = function(express) {
 					fileredMessages = receiverMsgs.messagesSent.filter(function(item) {
 						return item.receiver == sender;
 					});
-					console.log("receiverFilteredMessages");
-					console.log(fileredMessages);
 					messages = messages.concat(fileredMessages);
-					console.log("Final messages ");
-					console.log(messages);
 					res.send(messages);
 				}
 				else {
@@ -61,7 +57,6 @@ module.exports = function(express) {
 
 	messageRouter.post('/send', function(req, res) {
 		var conversation = req.body;
-		console.log(conversation);
 		var sender = conversation.sender,
 			receiver = conversation.receiver,
 			message = conversation.message;

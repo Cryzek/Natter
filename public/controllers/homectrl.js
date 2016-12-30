@@ -1,19 +1,25 @@
 angular
-.module('homectrl', ['ui.router', 'authService'])
-.controller('HomeController', function($state, Authorize, $scope, $http) {
+.module('homectrl', ['ui.router', 'authService', 'userService'])
+.controller('HomeController', function($scope, $state, Authorize, UserDetails) {
 	
-	Authorize
-		.isLoggedIn()
-		.success(function(response) {
-			if(response.status == false) {
-				$state.go('userauth');
-			}
-		});
-
 	var self = this;
+	self.user = {};
+
+	/*Check if the user is logged in.*/
+	Authorize.isLoggedIn().success(authCheck);
+
+	function authCheck(response) {
+		if(response.status == false) {
+			$state.go('userauth');
+		}
+	}
+
 	/*Get user information.*/
-	(function loadUserInfo() {
-	})();
+	UserDetails.getCurrentUser().success(loadUserInfo);
+
+	function loadUserInfo(response) {
+		self.user = response;
+	}
 
 	/*Maintain navbar state.*/
 	self.navbarOpen = false;
@@ -26,7 +32,8 @@ angular
 	}
 
 	self.logout = function() {
-		Authorize.logout();
-		$state.go('userauth');
+		Authorize.logout().success(function() {
+			$state.go('userauth');
+		});
 	}
 });

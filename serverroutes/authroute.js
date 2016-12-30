@@ -29,8 +29,9 @@ module.exports = function(express) {
 					/*Verify the user*/
 					var salt = dbuser.salt, hash = dbuser.passwordHash;
 					if( passwordSec.verify(salt, hash, user.password) ) {
-						req.session.user_id = user.username;
-						console.log(`User logged with session id - ${req.session.user_id}`);
+						req.session.user_id = dbuser._id;
+						req.session.user_name = dbuser.username;
+						console.log(`${req.session.user_name} logged with session id - ${req.session.user_id}`);
 						res.json({
 							status: true,
 							message: "Successfully logged in."
@@ -41,14 +42,13 @@ module.exports = function(express) {
 						res.json({
 							status: false,
 							message: "Wrong password."
-						})
+						});
 					}
 				}
 				else {
 					/*Add new user*/
 					var passwordData = passwordSec.saltAndHash(user.password);
 					/*passwordData will contain salt and passwordHash that'll go in the database for new users */
-					// console.log(`Salt: ${passwordData.salt}\nHash : ${passwordData.passwordHash}\n`);
 					var newuser = new User({ 
 						username: user.username,
 						salt: passwordData.salt,
@@ -56,8 +56,9 @@ module.exports = function(express) {
 					});
 
 					newuser.save(function(err, dbuser) {
-						req.session.user_id = user.username;
-						console.log(`User logged with session id - ${req.session.user_id}`);
+						req.session.user_id = dbuser._id;
+						req.session.user_name = dbuser.username;
+						console.log(`${req.session.user_name} logged with session id - ${req.session.user_id}`);
 						res.json({
 							status: true,
 							message: "New user added" 
@@ -69,8 +70,9 @@ module.exports = function(express) {
 	});
 
 	authRouter.post('/logout', function(req, res) {
-		console.log(`${req.session.user_id} logged out.`);
+		console.log(`${req.session.user_name} logged out.`);
 		delete req.session.user_id;
+		delete req.session.user_name;
 		req.session.destroy();
 		res.clearCookie('connect.sid', { path: '/' });
 		res.redirect('login');

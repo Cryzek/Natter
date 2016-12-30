@@ -3,9 +3,11 @@ var natterApp = angular.module('Natter',[
 										'ngAnimate',
 										'authService',
 										'messageService',
+										'userService',
 										'mainctrl',
 										'authctrl',
 										'homectrl',
+										'listusersctrl',
 										'conversationctrl'
 										]);
 
@@ -17,7 +19,7 @@ function setupConfig($stateProvider, $urlRouterProvider, $locationProvider) {
 
 	$stateProvider
 		.state('home', {
-			url: "/",
+			url: "/home",
 			templateUrl: "pages/home.html",
 			controller: "HomeController",
 			controllerAs: "vm"
@@ -29,21 +31,26 @@ function setupConfig($stateProvider, $urlRouterProvider, $locationProvider) {
 		  	controllerAs: "vm"
 		})
 		.state('home.listusers', {
-			url: "listusers",
-			templateUrl: "pages/listusers.html"
+			url: "/listusers",
+			templateUrl: "pages/listusers.html",
+			controller: "ListUsersController",
+			controllerAs: "vm"
 		})
 		.state('home.listgroups', {
-			url: "listgroups",
+			url: "/listgroups",
 			templateUrl: "pages/listgroups.html"
 		})
-		.state('home.converse', {
-			url: "natter/:userid",
+		.state('home.natter', {
+			url: "/natter/{receiverId}",
 			templateUrl: "pages/conversation.html",
+			params: {
+				receiverId: null
+			},
 			controller: "ConversationController",
 			controllerAs: "vm"
 		});
 
 
-	$urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise('/home');
 
 }
