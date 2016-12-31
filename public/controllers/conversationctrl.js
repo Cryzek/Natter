@@ -38,7 +38,6 @@ angular
 			return nat;
 		});
 		self.nats = nats;
-		setTimeout(() => { $("#messages-list").scrollTop(999999) }, 100);
 		/*Create and join a personal room*/
 		socket.emit('create-room', self.sender);
 	}
@@ -53,7 +52,6 @@ angular
 			};
 			self.nats.push(newNat);
 			self.message = "";
-			setTimeout(() => { $("#messages-list").scrollTop(999999) }, 100);
 		}
 	}
 
@@ -63,6 +61,5 @@ angular
 			sentByUser: false
 		};
 		self.nats.push(newNat);
-		setTimeout(() => { $("#messages-list").scrollTop(999999) }, 100);
 	});
 });

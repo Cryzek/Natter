@@ -36,7 +36,7 @@ var userInfoRouter = require('./serverroutes/userinforoute')(express);
 /*
 	Connecting to mongoose;
 */
-DBINIT.init(mongoose, process.env.DBPATH, process.env.DBNAME);
+DBINIT.init(mongoose, process.env.DBURI);
 
 /*
 	Setting up different middlewares
