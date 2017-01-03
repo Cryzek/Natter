@@ -7,7 +7,6 @@ angular
 
 	/*Check if the user is logged in.*/
 	Authorize.isLoggedIn().success(authCheck);
-
 	function authCheck(response) {
 		if(response.status == false) {
 			$state.go('userauth');
@@ -16,7 +15,6 @@ angular
 
 	/*Get user information.*/
 	UserDetails.getCurrentUser().success(loadUserInfo);
-
 	function loadUserInfo(response) {
 		self.user = response;
 	}

@@ -1,7 +1,7 @@
 var model = require('../models');
 var passwordSec = require('../passwordSec');
 var User = model.user;
-
+var AVATARCOUNT = 4;
 module.exports = function(express) {
 	var authRouter = express.Router();
 
@@ -48,11 +48,13 @@ module.exports = function(express) {
 				else {
 					/*Add new user*/
 					var passwordData = passwordSec.saltAndHash(user.password);
+					var image = "images/avatars/avatar" + Math.ceil(Math.random() * AVATARCOUNT) + ".jpg" ; 
 					/*passwordData will contain salt and passwordHash that'll go in the database for new users */
 					var newuser = new User({ 
 						username: user.username,
 						salt: passwordData.salt,
-						passwordHash: passwordData.passwordHash
+						passwordHash: passwordData.passwordHash,
+						image: image
 					});
 
 					newuser.save(function(err, dbuser) {

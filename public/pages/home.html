@@ -1,8 +1,8 @@
 <div class="col s12" id="home-container">
 	<!-- This is the side navbar  -->
 	<ul ng-class="{ 'navbar-opened': vm.navbarOpen, 'navbar-closed': !vm.navbarOpen }" id="side-navbar">
-		<li class="flex-col-centered waves-light waves-effect" id="account" ng-click="vm.toggleNavbar('close')">
-			
+		<li class="flex-col-centered waves-light waves-effect" id="user-info" ng-click="vm.toggleNavbar('close')">
+			<img src="{{vm.user.image}}">
 		</li>
 		<li class="flex-col-centered waves-light waves-effect" ui-sref=".listusers" ng-click="vm.toggleNavbar('close')">
 			<a>Conversations</a>

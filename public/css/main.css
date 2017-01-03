@@ -123,6 +123,12 @@
 
 	@media(max-width: 600px) {
 	}
+
+	#toast-container {
+		left: 50%;
+		width: auto;
+		transform: translateX(-50%);
+	}
 /*
 	End of global rules
 */
@@ -243,9 +249,15 @@
 			height: 60px;
 		}
 
-		#side-navbar > li#account {
-			height: 200px;
+		#side-navbar > li#user-info {
+			height: 300px;
 			background-color: rgba( 255, 159, 177, 0);
+		}
+
+		#side-navbar > li#user-info > img {
+			display: block;
+			width: 100%;
+			height: 100%;
 		}
 
 		#side-navbar > li:nth-of-type(2) {
@@ -471,7 +483,7 @@
 	}
 
 	#conversation-container > #send-message {
-		height: 20vh;
+		height: 60px;
 		box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.34),
 					0 3px 14px 2px rgba(0, 0, 0, 0.22),
 					0 5px 5px -3px rgba(0, 0, 0, 0.3);
@@ -482,46 +494,46 @@
 		position: relative;
 		width: 100%;
 		height: calc(100% - 0vh);
-		min-height: 60px;
-		padding-left: 0px !important; 
-	}
-
-	#conversation-container > #send-message > form > .input-field {
-		width: calc(100%);
-		height: 100% !important;
-		padding: 1vh 20px !important;
+		padding-left: 0px !important;
 		background-color: white;
 	}
 
-	#conversation-container > #send-message > form > .input-field > textarea {
+	#conversation-container > #send-message > form > .input-field {
+		flex-grow: 2;
+		width: calc(100%);
+		height: 100% !important;
+		padding: 1vh 20px !important;
+	}
+
+	#conversation-container > #send-message > form > .input-field > input {
 		width: 100%;
 		height: 100% !important;
 		border: none;
 	}
 
-	#conversation-container > #send-message > form > .input-field > textarea + label {
+	#conversation-container > #send-message > form > .input-field > input + label {
 		-webkit-transition: all 0.25s;
 		transition: all 0.25s;
 	}
 
-	#conversation-container > #send-message > form > .input-field > textarea:focus:not([readonly]) {
+	#conversation-container > #send-message > form > .input-field > input:focus:not([readonly]) {
 		border: none;
 		box-shadow: none;
 	}
 
-	#conversation-container > #send-message > form > .input-field > textarea:focus:not([readonly]) + label {
+	#conversation-container > #send-message > form > .input-field > input:focus:not([readonly]) + label {
 		color: #63a2b9;
 	}
 
 	#conversation-container > #send-message > form > .options{
-		position: absolute;
+		/*position: absolute;
 		left: 0;
-		bottom: 0;
+		bottom: 0;*/
 		-webkit-box-pack: end;
 		    -ms-flex-pack: end;
 		        justify-content: flex-end;
-		width: 100%;
-		height: 40px;
+		width: auto;
+		height: 100%;
 		padding: 0 10px !important;
 		/*box-shadow: 0 -1px 3px 0 rgba(128, 128, 128, 0.5);*/
 	}
@@ -534,4 +546,66 @@
 	}
 /*
 	Conversation Route ends here
+*/
+
+/*
+	List Users Route
+*/
+	#list-users {
+		justify-content: flex-start;
+		width: 100%;
+		min-height: 100%;
+		border-left: 0px solid #7fb0b0;
+	}
+
+	#list-users > .user{
+		position: relative;
+		justify-content: flex-start;
+		width: 100%;
+		height: 75px;
+		padding: 0 25px !important;
+	}
+
+	#list-users > .user > *{
+		margin-right: 2vw !important;
+	}
+
+	#list-users > .user > img.user-image {
+		width: auto;
+		height: 60%;
+		border-radius: 50%;
+	}
+
+	#list-users > .user > p.user-name{
+		color: black;
+		font-size: 1.2em;
+	}
+
+	#list-users > .user > .divider {
+	    position: absolute;
+	    bottom: 0;
+	    left: 5%;
+	    width: 90%;
+	    height: 2px;
+	    background-color: #ffffff;
+	    margin-right: 0 !important;
+	}
+
+/*
+	List Users Route ends here
+*/
+
+
+/*
+	List Groups Route
+*/
+	#list-groups {
+		justify-content: flex-start;
+		width: 100%;
+		min-height: 100%;
+		border-left: 1px solid white;
+		border-right: 1px solid white;
+	}
+/*
+	List Groups Route ends here
 */

@@ -2,7 +2,7 @@
 	<div class="col s12 flex-row-centered" id="user-info">
 	    <div class="chip">
 		    <!-- <img src="images/jason.jpg" alt="Contact Person"> -->
-    		Natting with {{ vm.receiver }}
+    		Natting with {{ vm.receiver.username }}
     	</div>
 	</div>
 	<!-- This is where all the old messages would go. -->
@@ -13,9 +13,9 @@
 		</div>
 	</div>
 	<div class="col s12" id="send-message">
-		<form class="flex-col-centered" ng-submit="vm.sendMessage()">
+		<form class="flex-row-centered" ng-submit="vm.sendMessage()">
 			<div class="input-field">
-				<textarea class="materialize-textarea" id="message" ng-model="vm.message" required></textarea>
+				<input type="text" id="message" ng-model="vm.message" required>
 				<label for="message">Your message : </label>
 			</div>
 			<div class="options flex-row-centered">

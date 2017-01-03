@@ -14,7 +14,8 @@ module.exports = function(express, io) {
 				}
 				else {
 					res.send({
-						username: dbuser.username
+						username: dbuser.username,
+						image: dbuser.image
 					});
 				}
 			});
@@ -25,6 +26,27 @@ module.exports = function(express, io) {
 		}
 	});	
 	
+	userInfoRouter.get('/userinfo/:username', function(req, res) {
+		if(req.params.username) {
+			var username = req.params.username;
+			User.findOne({username: username}, function(err, dbuser) {
+				if(err) {
+					console.log(`Error in database.\n${err}.`);
+					res.status(500).end();
+				}
+				else {
+					res.send({
+						username: dbuser.username,
+						image: dbuser.image
+					});
+				}
+			});
+		}
+		else {
+			res.send(404, "Not found");
+		}
+	});
+
 	userInfoRouter.get('/all', function(req, res) {
 		User.find({}, function(err, users) {
 			if(err) {
@@ -34,9 +56,11 @@ module.exports = function(express, io) {
 			else {
 				var userdetails = users.map(function(item) {
 											return {
-												username: item.username
+												username: item.username,
+												image: item.image
 											}
 										}).filter(function(item) {
+											/*Return all except the logged in one*/
 											if(req.session.user_id) {
 												return req.session.user_name != item.username
 											}

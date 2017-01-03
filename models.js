@@ -7,7 +7,8 @@ var userSchema = new Schema({
 		unique: true
 	},
 	"passwordHash": String,
-	"salt": String
+	"salt": String,
+	"image": String
 });
 
 var user = mongoose.model('User', userSchema);

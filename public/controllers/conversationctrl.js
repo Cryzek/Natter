@@ -3,6 +3,7 @@ angular
 .controller('ConversationController', function($scope, $stateParams, $state, Authorize, Messages, UserDetails) {
 
 	var self = this;
+	var socket = io.connect();
 
 	/*Check if the user is logged in.*/
 	Authorize.isLoggedIn().success(authCheck);
@@ -13,44 +14,51 @@ angular
 	}
 
 	self.message = "";
-	self.sender = "";
-	self.receiver = "" || $stateParams.receiverId;
+	self.sender = {};
 	/*A nats element has structure: { message: '', sentByUser: true/false}*/
 	self.nats = [];
-
-	UserDetails.getCurrentUser().success(loadUserInfo);
-	function loadUserInfo(response) {
-		self.sender = response.username;
+	UserDetails.getCurrentUser().success(loadSenderInfo);
+	function loadSenderInfo(response) {
+		self.sender = response;
 		/*To get the conversation between the two we need the sender and receiver names.*/
-		Messages.getConversation(self.sender, self.receiver).success(loadMessages);
+		Messages.getConversation(self.sender.username, self.receiver.username).success(loadMessages);
 	}
-
-	var socket = io.connect();
 
 	function loadMessages(response) {
 		/*Get conversation between the two.*/
 		nats = response.map(function(item) {
 			var nat = {
 				message: item.message,
-				sentByUser: (item.receiver == self.receiver),
+				sentByUser: (item.receiver != self.sender.username),
 				time: new Date(item.timeStamp).toUTCString()
 			}
 			return nat;
 		});
 		self.nats = nats;
+		$("#messages-list").scrollTop(999999);
 		/*Create and join a personal room*/
 		socket.emit('create-room', self.sender);
 	}
 
+	self.receiver = {
+		username: "" || $stateParams.receiverId
+	};
+	UserDetails.getUser(self.receiver.username).success(loadReceiverInfo);
+	function loadReceiverInfo(response) {
+		self.receiver = response;
+	}
+
+	/*Different event listeners.*/
 	self.sendMessage = function() {	
 		if(self.message != "") {
-			Messages.sendMessage(self.sender, self.receiver, self.message, socket);
+			Messages.sendMessage(self.sender.username, self.receiver.username, self.message, socket);
 			socket.emit('send-message', self.message, self.receiver);
 			var newNat = {
 				message: self.message,
 				sentByUser: true
 			};
 			self.nats.push(newNat);
+			$("#messages-list").scrollTop(999999);
 			self.message = "";
 		}
 	}
@@ -60,6 +68,10 @@ angular
 			message: response.message,
 			sentByUser: false
 		};
-		self.nats.push(newNat);
+		$scope.$apply( () => { 
+			self.nats.push(newNat); 
+			$("#messages-list").scrollTop(999999);
+		});
+		Materialize.toast("New message received", 1000);
 	});
 });

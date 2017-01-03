@@ -1,5 +1,7 @@
-<div id="list-users">
+<div class="flex-col-centered" id="list-users">
 	<div class="user flex-row-centered col s12 waves-effect" ng-repeat="user in vm.userlist" ui-sref="home.natter({receiverId: user.username})">
-	{{ user.username }}
+		<img class="user-image" src="{{user.image}}">
+		<p class="user-name">{{ user.username }}</p>
+		<div class="divider"></div>
 	</div>
 </div>
