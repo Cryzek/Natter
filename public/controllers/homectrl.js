@@ -13,10 +13,16 @@ angular
 		}
 	}
 
+	self.socket = io.connect();
+	self.socket.on('new-user-connected', function(user) {
+		Materialize.toast(`${user.username} has connected`, 1000);
+	});
+
 	/*Get user information.*/
 	UserDetails.getCurrentUser().success(loadUserInfo);
 	function loadUserInfo(response) {
 		self.user = response;
+		self.socket.emit('create-room', self.user);
 	}
 
 	/*Maintain navbar state.*/

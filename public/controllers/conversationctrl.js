@@ -3,7 +3,7 @@ angular
 .controller('ConversationController', function($scope, $stateParams, $state, Authorize, Messages, UserDetails) {
 
 	var self = this;
-	var socket = io.connect();
+	self.socket = $scope.vm.socket;
 
 	/*Check if the user is logged in.*/
 	Authorize.isLoggedIn().success(authCheck);
@@ -36,8 +36,6 @@ angular
 		});
 		self.nats = nats;
 		$("#messages-list").scrollTop(999999);
-		/*Create and join a personal room*/
-		socket.emit('create-room', self.sender);
 	}
 
 	self.receiver = {
@@ -51,8 +49,8 @@ angular
 	/*Different event listeners.*/
 	self.sendMessage = function() {	
 		if(self.message != "") {
-			Messages.sendMessage(self.sender.username, self.receiver.username, self.message, socket);
-			socket.emit('send-message', self.message, self.receiver);
+			Messages.sendMessage(self.sender.username, self.receiver.username, self.message);
+			self.socket.emit('send-message', self.message, self.receiver.username);
 			var newNat = {
 				message: self.message,
 				sentByUser: true
@@ -63,7 +61,7 @@ angular
 		}
 	}
 
-	socket.on('receive-message', function(response) {
+	self.socket.on('receive-message', function(response) {
 		var newNat = {
 			message: response.message,
 			sentByUser: false

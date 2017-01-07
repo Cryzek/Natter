@@ -44,11 +44,16 @@ DBINIT.init(mongoose, process.env.LOCALDBURI);
 /*Setting up sessions*/
 app.use(expressSession({
 	secret: "itsnosecret",
-	duration: 20 * MIN,
-	activeDuration: 10*MIN,
+	cookie: {
+		path: '/',
+		httpOnly: true,
+		secure: false,
+		maxAge: 60 * MIN // 1 hour
+	},
 	unset: 'destroy',
 	store: new mongoStore({
-		mongooseConnection: mongoose.connection
+		mongooseConnection: mongoose.connection,
+		ttl: 5 * 60 * 60 // 5 hours
 	})
 }) );
 /*Applying the body-parser middleware to append post data to req as req.body*/
@@ -77,8 +82,10 @@ app.get('*', function(req, res) {
 
 io.on('connection', function(socket) {
 
-	socket.on('create-room', function(username) {
-		socket.join(username);
+	socket.on('create-room', function(sender) {
+		// console.log(sender);
+		socket.join(sender.username);
+		socket.broadcast.emit('new-user-connected', sender);
 	});
 
 	socket.on('send-message', function(message, receiverId) {
