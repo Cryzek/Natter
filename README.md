@@ -36,7 +36,6 @@ Although, listed in the package.json file, different modules used in the app are
     <li><b>Using socketio -</b> My first hands on with sockets in javascript. Much easier than sockets in c. Socketio provides a great API to exchange data to-and-forth between the client and server. </li>
     <li><b>Salt and hashing -</b> For a new user, the passwords are mixed with salt(random bytes) and hashed. Finally the password hash and the salt are stored in the database. On login , the passsword is again salt-and-hashed(salt used from the database). The password hash generated is matched against the one stored in the database to authenticate the user.</li>
     <li><b>Using the ui-router and ng-animate.</b></li>
-    <li>I have tried to follow the REST architecture.</li>
 </ul>
 
 <p align="center"><img src="https://ourjourneytothewest.files.wordpress.com/2014/10/1024px-heart_corazc3b3n-svg.png?w=300&h=300" width="15px" height="15px"> JS.Happy coding.<b>|-_-|</b></p>
